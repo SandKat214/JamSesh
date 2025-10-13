@@ -1,6 +1,4 @@
 from flask import request, jsonify
-import uuid
-from datetime import datetime
 
 from .app import app
 from . import models, db
