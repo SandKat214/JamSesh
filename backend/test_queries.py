@@ -14,12 +14,14 @@ def get_user(user_id):
     user = models.User.query.get(user_id)
     user_instruments = [ui.toDict() for ui in user.user_instruments] if user else []
     user_genres = [genre.toDict() for genre in user.genres] if user else []
+    user_reviews = [review.toDict() for review in user.reviews_about] if user else []
 
     if user:
         return jsonify({
             "user": user.toDict(),
             "instruments": user_instruments,
-            "genres": user_genres
+            "genres": user_genres,
+            "reviews": user_reviews
         })
     return jsonify({"error": "User not found"}), 404
 
