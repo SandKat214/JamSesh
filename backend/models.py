@@ -29,7 +29,13 @@ class User_Instrument(db.Model):
     instrument = db.relationship('Instrument', back_populates="instrument_users")
 
     def toDict(self):
-          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+          return {
+               "user_instruments_id": self.user_instruments_id,
+               "instrument_id": self.instrument_id,
+               "user_id": self.user_id,
+               "skill_level": self.skill_level,
+               "name": self.instrument.name if self.instrument else None
+          }
  
 class Ad(db.Model):
     __table__ = db.metadata.tables["Ads"]

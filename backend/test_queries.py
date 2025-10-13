@@ -9,6 +9,20 @@ def get_users():
     users_list = [user.toDict() for user in users]  # Using the toDict method
     return jsonify(users_list)
 
+@app.route('/test/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = models.User.query.get(user_id)
+    user_instruments = [ui.toDict() for ui in user.user_instruments] if user else []
+    user_genres = [genre.toDict() for genre in user.genres] if user else []
+
+    if user:
+        return jsonify({
+            "user": user.toDict(),
+            "instruments": user_instruments,
+            "genres": user_genres
+        })
+    return jsonify({"error": "User not found"}), 404
+
 @app.route('/test/create-test-user', methods=['POST'])
 def create_test_user():
     try:
@@ -17,13 +31,13 @@ def create_test_user():
         
         # Set some test data (adjust these fields based on your Users table columns)
         test_data = {
-            "username": "test_user_5",
-            "email": "test_user_5@gmail.com",
-            "password": "test_pass_5",
-            "profile_pic": "test_url_5",
-            "bio": "Hello, I am the fifth test user!",
-            "city": "Austin",
-            "state": "TX"
+            "username": "test_user_6",
+            "email": "test_user_6@gmail.com",
+            "password": "test_pass_6",
+            "profile_pic": "test_url_6",
+            "bio": "Hello, I am the sixth test user!",
+            "city": "Denver",
+            "state": "CO"
         }
         
         # Set the attributes on the user object
@@ -32,30 +46,30 @@ def create_test_user():
                 setattr(test_user, key, value)
 
         # Add user genres
-        genre_names = ["classical", "folk"]
+        genre_names = ["pop", "folk"]
         for name in genre_names:
             # Query for genre in database
             genre = models.Genre.query.filter_by(name=name).first()
             if genre:
                 test_user.genres.append(genre)
 
-         # Add instruments with skill levels
-        #instruments_with_skill = [
-            #{"name": "violin", "skill_level": 3},
-            #{"name": "piano", "skill_level": 5}
-        #]
+        # Add instruments with skill levels
+        instruments_with_skill = [
+            {"name": "violin", "skill_level": 3},
+            {"name": "piano", "skill_level": 5}
+        ]
         
-        #for item in instruments_with_skill:
+        for item in instruments_with_skill:
             # Try to find the instrument in the database
-            #instr = models.Instrument.query.filter_by(name=item["name"]).first()
+            instr = models.Instrument.query.filter_by(name=item["name"]).first()
             
             # Create the association object
-            #user_instrument_assoc = models.User_Instrument(
-                #user=test_user,
-                #instrument=instr,
-                #skill_level=item["skill_level"]
-            #)
-            #db.session.add(user_instrument_assoc)
+            user_instrument_assoc = models.User_Instrument(
+                user=test_user,
+                instrument=instr,
+                skill_level=item["skill_level"]
+            )
+            db.session.add(user_instrument_assoc)
         
         # Add and commit to database
         db.session.add(test_user)
