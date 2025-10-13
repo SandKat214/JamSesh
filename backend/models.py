@@ -1,8 +1,6 @@
 # Based on https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj#how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql
 
 from sqlalchemy import inspect
-from datetime import datetime
-from sqlalchemy.orm import validates
 
 # Import db from the current package
 from . import db
@@ -16,36 +14,63 @@ class User(db.Model):
     genres = db.relationship('Genre', secondary="User_Genres", back_populates="users")
     instruments = db.relationship('Instrument', secondary="User_Instruments", back_populates="users")
 
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+
 class User_Genre(db.Model):
     __table__ = db.metadata.tables["User_Genres"]
 
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+
 class User_Instrument(db.Model):
     __table__ = db.metadata.tables["User_Instruments"]
+
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
  
 class Ad(db.Model):
     __table__ = db.metadata.tables["Ads"]
     poster = db.relationship('User', back_populates='ads')
     instruments = db.relationship('Instrument', secondary="Ad_Instruments", back_populates="ads")
 
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+
 class Ad_Instrument(db.Model):
     __table__ = db.metadata.tables["Ad_Instruments"]
+
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
 
 class Genre(db.Model):
     __table__ = db.metadata.tables["Genres"]
     users = db.relationship('User', secondary="User_Genres", back_populates="genres")
+
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
 
 class Instrument(db.Model):
     __table__ = db.metadata.tables["Instruments"]
     users = db.relationship('User', secondary="User_Instruments", back_populates="instruments")
     ads = db.relationship('Ad', secondary="Ad_Instruments", back_populates="instruments")
 
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+
 class Media(db.Model):
     __table__ = db.metadata.tables["Media"]
     uploader = db.relationship('User', back_populates="media_uploads")
+
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
 
 class Review(db.Model):
     __table__ = db.metadata.tables["Reviews"]
     reviewee = db.relationship('User', foreign_keys = "Review.reviewee_id", back_populates="reviews_about")
     reviewer = db.relationship('User', foreign_keys = "Review.reviewer_id", back_populates="reviews_by")
+
+    def toDict(self):
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
 
 
