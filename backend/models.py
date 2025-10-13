@@ -12,7 +12,7 @@ class User(db.Model):
     reviews_about = db.relationship('Review', foreign_keys = "Review.reviewee_id", back_populates="reviewee", cascade="all, delete-orphan")
     reviews_by = db.relationship('Review', foreign_keys = "Review.reviewer_id", back_populates="reviewer", cascade="all, delete-orphan")
     genres = db.relationship('Genre', secondary="User_Genres", back_populates="users")
-    instruments = db.relationship('Instrument', secondary="User_Instruments", back_populates="users")
+    user_instruments = db.relationship('User_Instrument', back_populates="user", cascade="all, delete-orphan")
 
     def toDict(self):
           return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
@@ -25,6 +25,8 @@ class User_Genre(db.Model):
 
 class User_Instrument(db.Model):
     __table__ = db.metadata.tables["User_Instruments"]
+    user = db.relationship('User', back_populates="user_instruments")
+    instrument = db.relationship('Instrument', back_populates="instrument_users")
 
     def toDict(self):
           return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
@@ -52,7 +54,7 @@ class Genre(db.Model):
 
 class Instrument(db.Model):
     __table__ = db.metadata.tables["Instruments"]
-    users = db.relationship('User', secondary="User_Instruments", back_populates="instruments")
+    instrument_users = db.relationship('User_Instrument', back_populates="instrument", cascade="all, delete-orphan")
     ads = db.relationship('Ad', secondary="Ad_Instruments", back_populates="instruments")
 
     def toDict(self):
