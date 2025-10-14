@@ -13,5 +13,8 @@ def hello():
     return "Hello World!"
 
 
+# Register test query routes
+from . import test_queries
+
 if __name__ == "__main__":
     app.run()
