@@ -1,4 +1,5 @@
-# Based on https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj#how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql
+# toDict method based on https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj#how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql
+# Relationship definitions derived from https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
 
 from sqlalchemy import inspect
 
