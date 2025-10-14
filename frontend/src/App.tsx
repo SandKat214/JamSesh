@@ -2,6 +2,9 @@ import { Box, Typography } from "@mui/material"
 import { createBrowserRouter } from "react-router"
 import { RouterProvider } from "react-router/dom"
 
+// pages
+import Login from "./pages/Login"
+
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -10,6 +13,10 @@ const router = createBrowserRouter([
 				<Typography color='jamRed'>Home Page</Typography>
 			</Box>
 		),
+	},
+	{
+		path: "login",
+		Component: Login,
 	},
 ])
 
