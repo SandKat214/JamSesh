@@ -10,7 +10,6 @@ def get_users():
     return jsonify(users_list)
 
 
-
 @app.route('/test/users/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
 def get_edit_or_delete_user_by_id(user_id):
     user = models.User.query.get(user_id)
