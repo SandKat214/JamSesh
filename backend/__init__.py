@@ -16,4 +16,9 @@ def create_app(config_mode):
       db.init_app(app)
       migrate.init_app(app, db)
 
+      # Reflect the database tables after initializing the app
+      # NOTE: Check to make sure this will not cause circular dependencies!
+      with app.app_context():
+            db.reflect()
+
       return app
