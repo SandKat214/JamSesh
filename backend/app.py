@@ -14,7 +14,7 @@ def hello():
 
 
 # Register test query routes
-from api.auth import urls
+from .api.auth import urls
 from . import test_queries
 
 if __name__ == "__main__":
