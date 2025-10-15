@@ -1,6 +1,12 @@
 import { Box } from "@mui/material"
+import { useState } from "react"
+
+// Components
+import SignupController from "./sections/SignupController"
 
 const Login = () => {
+	const [open, setOpen] = useState(false) // Dialog control state
+
 	return (
 		<Box
 			sx={{
@@ -14,6 +20,7 @@ const Login = () => {
 		>
 			{/* Nest content in this box */}
 			Login Page
+			<SignupController open={open} setOpen={setOpen} />
 		</Box>
 	)
 }
