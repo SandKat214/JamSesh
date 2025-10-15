@@ -34,8 +34,8 @@ const colors = {
 	},
 	white: {
 		main: "#F8F8F8",
-		dark: "#ECECEC",
-		light: "#D0D0D0",
+		light: "#ECECEC",
+		dark: "#D0D0D0",
 		contrastText: "#E9E9E9",
 	},
 	jamRed: {
@@ -64,10 +64,13 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: "'Mulish', sans-serif",
+		fontFamily: "Mulish, sans-serif",
 		allVariants: {
 			color: colors.purple.dark,
 			letterSpacing: "0.5px",
+		},
+		h6: {
+			fontSize: ".75rem",
 		},
 	},
 	components: {
@@ -79,6 +82,7 @@ const theme = createTheme({
 						textTransform: "none",
 						backgroundColor: colors.purple.main,
 						color: colors.white.main,
+						fontSize: "0.87rem",
 						borderRadius: "12px",
 						padding: "2px 23px",
 						boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.25)",
@@ -88,8 +92,9 @@ const theme = createTheme({
 					props: { variant: "containedNeutral" },
 					style: {
 						textTransform: "none",
-						backgroundColor: colors.white.dark,
+						backgroundColor: colors.white.light,
 						color: colors.gray.main,
+						fontSize: "0.87rem",
 						borderRadius: "12px",
 						padding: "2px 23px",
 						boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.25)",
@@ -99,6 +104,32 @@ const theme = createTheme({
 					},
 				},
 			],
+		},
+		MuiFormControl: {
+			styleOverrides: {
+				root: {
+					"& .MuiInputBase-root": {
+						fontSize: "0.9rem",
+						borderRadius: "12px",
+						color: colors.purple.dark,
+					},
+					"& .MuiInputBase-input": {
+						padding: "4px 15px",
+					},
+					"& .MuiOutlinedInput-root": {
+						backgroundColor: colors.white.main,
+						"& fieldset": {
+							border: `2px solid ${colors.white.dark}`,
+						},
+						"&:hover fieldset": {
+							borderColor: colors.purple.main,
+						},
+						"&.Mui-focused fieldset": {
+							borderColor: colors.purple.main,
+						},
+					},
+				},
+			},
 		},
 		MuiStepConnector: {
 			styleOverrides: {

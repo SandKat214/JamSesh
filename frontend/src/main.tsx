@@ -5,7 +5,6 @@ import { AuthProvider } from "./context/auth/AuthContext"
 
 // styles
 import "./index.css"
-import "@fontsource-variable/mulish"
 import theme from "./utils/theme.ts"
 
 // routing
