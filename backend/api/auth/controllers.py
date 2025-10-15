@@ -45,9 +45,6 @@ def register_controller():
         return jsonify({"error": str(e)}), 400
     
     
-
-
-
 def login_controller():
     pass
 
@@ -61,3 +58,5 @@ def create_new_user(username, email, password, profile_pic, bio, city, state):
     user.bio = bio
     user.city = city
     user.state = state
+
+    return user
