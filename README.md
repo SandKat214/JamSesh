@@ -44,4 +44,5 @@ To run the frontend locally:
     npm run dev
     ```
 4. **Open the app in your browser**
-   Once the server starts, open your browser and navigate to the address shown in your terminal.
+
+    Once the server starts, open your browser and navigate to the address shown in your terminal.
