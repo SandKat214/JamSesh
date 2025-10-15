@@ -18,6 +18,7 @@ from . import test_queries
 
 # Register instrument endpoint routes
 from .api.instruments import urls
+from .api.auth import urls
 
 if __name__ == "__main__":
     app.run()
