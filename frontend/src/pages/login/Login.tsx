@@ -1,6 +1,8 @@
 import { Box } from "@mui/material"
-import SignupController from "./sections/SignupController"
 import { useState } from "react"
+
+// Components
+import SignupController from "./sections/SignupController"
 
 const Login = () => {
 	const [open, setOpen] = useState(false) // Dialog control state

@@ -8,36 +8,39 @@ import {
 	StepContent,
 	StepLabel,
 	Stepper,
-	Typography,
 } from "@mui/material"
 import { useState } from "react"
+
+// Components
+import AccountCredentials from "../forms/AccountCredentials"
+import PersonalDetails from "../forms/PersonalDetails"
 
 interface SignupControllerProps {
 	open: boolean
 	setOpen: (value: boolean) => void
 }
 
-const steps = [
-	{
-		label: "Account Credentials",
-		form: "Insert form component here",
-	},
-	{
-		label: "Personal Details",
-		form: "Insert form component here",
-	},
-	{
-		label: "Profile Details",
-		form: "Insert form component here",
-	},
-	{
-		label: "Auditory Preferences",
-		form: "Insert form component here",
-	},
-]
-
 const SignupStepper = ({ setOpen }: { setOpen: (value: boolean) => void }) => {
 	const [activeStep, setActiveStep] = useState(0)
+
+	const steps = [
+		{
+			label: "Account Credentials",
+			form: AccountCredentials,
+		},
+		{
+			label: "Personal Details",
+			form: PersonalDetails,
+		},
+		{
+			label: "Profile Details",
+			form: PersonalDetails,
+		},
+		{
+			label: "Auditory Preferences",
+			form: PersonalDetails,
+		},
+	]
 
 	const handleContinue = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -60,35 +63,19 @@ const SignupStepper = ({ setOpen }: { setOpen: (value: boolean) => void }) => {
 	}
 
 	return (
-		<form>
-			<Stepper activeStep={activeStep} orientation='vertical'>
-				{steps.map((step, index) => (
-					<Step key={index}>
-						<StepLabel>{step.label}</StepLabel>
-						<StepContent>
-							<Typography>{step.form}</Typography>
-							<Stack direction='row' spacing={1} sx={{ mt: 2 }}>
-								<Button
-									variant='containedNeutral'
-									disabled={index === 0}
-									onClick={handleBack}
-								>
-									Back
-								</Button>
-								<Button
-									variant='containedPurple'
-									onClick={handleContinue}
-								>
-									{index === steps.length - 1
-										? "Finish"
-										: "Continue"}
-								</Button>
-							</Stack>
-						</StepContent>
-					</Step>
-				))}
-			</Stepper>
-		</form>
+		<Stepper activeStep={activeStep} orientation='vertical'>
+			{steps.map((step, index) => (
+				<Step key={index}>
+					<StepLabel>{step.label}</StepLabel>
+					<StepContent>
+						<step.form
+							handleBack={handleBack}
+							handleSubmit={handleContinue}
+						/>
+					</StepContent>
+				</Step>
+			))}
+		</Stepper>
 	)
 }
 
@@ -117,16 +104,17 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 				slotProps={{
 					paper: {
 						sx: {
-							bgcolor: "white.light",
-							borderRadius: "30px",
+							bgcolor: "white.dark",
+							borderRadius: "25px",
 							px: "10px",
+                            pb: "20px",
 						},
 					},
 				}}
-				open={open}
+				open={true}
 				onClose={() => setOpen(false)}
 			>
-				<DialogTitle sx={{ fontSize: "25px" }}>
+				<DialogTitle sx={{ fontSize: "25px", fontWeight: 600 }}>
 					Create an account
 				</DialogTitle>
 				<DialogContent>
