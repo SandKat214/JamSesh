@@ -10,4 +10,3 @@ def instruments():
         return list_all_instruments_controller()
     if request.method == 'POST':
         return add_instrument_controller()
-  
