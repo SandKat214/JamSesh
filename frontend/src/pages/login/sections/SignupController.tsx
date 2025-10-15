@@ -111,7 +111,7 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 						},
 					},
 				}}
-				open={true}
+				open={open}
 				onClose={() => setOpen(false)}
 			>
 				<DialogTitle sx={{ fontSize: "25px", fontWeight: 600 }}>
