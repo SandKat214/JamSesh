@@ -1,9 +1,12 @@
 from flask import request, jsonify
+from flask_jwt_extended import create_access_token
 from ... import models, db
 import bcrypt
 
 # Register controller logic based on this YouTube tutorial: https://www.youtube.com/watch?v=mjZIv4ey0ps&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT&index=3
 def register_controller():
+    """Register new user, encrypt their password, and generate access token to log them in 
+    for the first time"""
     user_data = request.get_json()
     
     try:
@@ -18,9 +21,7 @@ def register_controller():
         instruments = user_data['instruments']
         genres = user_data['genres']
 
-        # error handling if username and email already in database
-        if models.User.query.filter_by(username=username).first():
-            return jsonify({"error": "Username is already in use"}), 400
+        # error handling if email already in database
         if models.User.query.filter_by(email=email).first():
             return jsonify({"error": "Email is already in use"}), 400
         
@@ -28,16 +29,16 @@ def register_controller():
         hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hash = hash.decode('utf-8')
         
-        # create and stage new user
+        # create new user, add to database, and generate access token
         new_user = create_new_user(username, email, hash, profile_pic, bio, city, state)
         db.session.add(new_user)
-
-        # add new user info to database
         db.session.commit()
+        token = create_access_token(identity=new_user.user_id)
 
         return jsonify({
             "message": "New user created successfully",
-            "user": new_user.toDict()
+            "user": new_user.toDict(),
+            "token": token
         }), 201
 
     except Exception as e:
@@ -49,7 +50,7 @@ def login_controller():
     pass
 
 def create_new_user(username, email, password, profile_pic, bio, city, state):
-    """ Set attributes of new user"""
+    """Set attributes of new user"""
     user = models.User()
     user.username = username
     user.email = email
@@ -60,3 +61,14 @@ def create_new_user(username, email, password, profile_pic, bio, city, state):
     user.state = state
 
     return user
+
+def add_user_genres(user, genre_list):
+    """Add genres associated with given user"""
+    for id in genre_list:
+        genre = models.Genre.query.filter_by(genre_id=id).first()
+        if genre:
+            user.genres.append(genre)
+
+def add_user_instruments(user, instrument_list):
+    """Add instruments and corresponding skill level associated with given user"""
+    pass
