@@ -1,22 +1,13 @@
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token, current_user, jwt_required, JWTManager
 from ... import models, db
-from marshmallow import ValidationError
 import bcrypt
 
 # Register controller logic based on this YouTube tutorial: https://www.youtube.com/watch?v=mjZIv4ey0ps&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT&index=3
 def register_controller():
     """Register new user, encrypt their password, and generate access token to log them in 
     for the first time"""
-    data = request.get_json()
-    user_schema = models.UserSchema()
-    
-    try:
-        # Validate data and deserialize into Python 
-        user_data = user_schema.load(data)
-    except ValidationError as e:
-        # Return error message containting info about invalid fields if any
-        return jsonify({"errors": e.messages}), 400
+    user_data = request.get_json()
 
     # unpack data into variables
     username = user_data['username']
@@ -28,6 +19,9 @@ def register_controller():
     state = user_data['state']
     instruments = user_data['instruments']
     genres = user_data['genres']
+
+    if not username or not email or not password or not profile_pic or not bio or not city or not state or not instruments or not genres:
+        return jsonify({"error": "Required field missing"}), 400
 
     try:
         # error handling if email already in database
