@@ -1,26 +1,35 @@
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token, current_user, jwt_required, JWTManager
 from ... import models, db
+from marshmallow import ValidationError
 import bcrypt
 
 # Register controller logic based on this YouTube tutorial: https://www.youtube.com/watch?v=mjZIv4ey0ps&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT&index=3
 def register_controller():
     """Register new user, encrypt their password, and generate access token to log them in 
     for the first time"""
-    user_data = request.get_json()
+    data = request.get_json()
+    user_schema = models.UserSchema()
     
     try:
-        # unpack json into variables
-        username = user_data['username']
-        email = user_data['email']
-        password = user_data['password']
-        profile_pic = user_data['profile_pic']
-        bio = user_data['bio']
-        city = user_data['city']
-        state = user_data['state']
-        instruments = user_data['instruments']
-        genres = user_data['genres']
+        # Validate data and deserialize into Python 
+        user_data = user_schema.load(data)
+    except ValidationError as e:
+        # Return error message containting info about invalid fields if any
+        return jsonify({"errors": e.messages}), 400
 
+    # unpack data into variables
+    username = user_data['username']
+    email = user_data['email']
+    password = user_data['password']
+    profile_pic = user_data['profile_pic']
+    bio = user_data['bio']
+    city = user_data['city']
+    state = user_data['state']
+    instruments = user_data['instruments']
+    genres = user_data['genres']
+
+    try:
         # error handling if email already in database
         if models.User.query.filter_by(email=email).one_or_none():
             return jsonify({"error": "Email is already in use"}), 400
@@ -47,7 +56,7 @@ def register_controller():
 
     except Exception as e:
         db.session.rollback()
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": str(e)}), 500
     
 # Login controller adapated from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
 def login_controller():
