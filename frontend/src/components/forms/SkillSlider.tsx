@@ -1,9 +1,16 @@
 import { Slider } from "@mui/material"
-import { useState } from "react"
 
-const SkillSlider = ({ id }: { id: string }) => {
-	const [value, setValue] = useState(1)
-
+const SkillSlider = ({
+	id,
+	name,
+	value,
+	onChange,
+}: {
+	id: string
+	name: string
+	value: number
+	onChange: (value: number) => void
+}) => {
 	const createMarks = (currValue: number) =>
 		Array.from({ length: 10 }, (_, i) => ({
 			value: i + 1,
@@ -13,12 +20,13 @@ const SkillSlider = ({ id }: { id: string }) => {
 	return (
 		<Slider
 			id={id}
+			name={name}
 			value={value}
 			step={1}
 			min={1}
 			max={10}
 			marks={createMarks(value)}
-			onChange={(_e, newValue) => setValue(newValue)}
+			onChange={(_e, newValue) => onChange(newValue)}
 		/>
 	)
 }
