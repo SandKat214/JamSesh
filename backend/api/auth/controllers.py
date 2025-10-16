@@ -22,10 +22,10 @@ def register_controller():
         genres = user_data['genres']
 
         # error handling if email already in database
-        if models.User.query.filter_by(email=email).first():
+        if models.User.query.filter_by(email=email).one_or_none():
             return jsonify({"error": "Email is already in use"}), 400
         
-        # encrypt user password
+        # encrypt user password and turn hashed password into string for database storage
         hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hash = hash.decode('utf-8')
         
@@ -49,7 +49,7 @@ def register_controller():
         db.session.rollback()
         return jsonify({"error": str(e)}), 400
     
-# Automatic user loading adapated from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
+# Login controller adapated from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
 def login_controller():
     """Logs user in"""
     email = request.json.get('email')
@@ -85,14 +85,14 @@ def create_new_user(username, email, password, profile_pic, bio, city, state):
 def add_user_genres(user, genre_list):
     """Add genres associated with given user"""
     for id in genre_list:
-        genre = models.Genre.query.filter_by(genre_id=id).first()
+        genre = models.Genre.query.filter_by(genre_id=id).one_or_none()
         if genre:
             user.genres.append(genre)
 
 def add_user_instruments(user, instrument_dict):
     """Add instruments and corresponding skill level associated with given user"""
     for instr_id, skill in instrument_dict.items():
-        instrument = models.Instrument.query.filter_by(instrument_id=int(instr_id)).first()
+        instrument = models.Instrument.query.filter_by(instrument_id=int(instr_id)).one_or_none()
         if instrument:
             user_instrument_skill = models.User_Instrument(
                 user=user,
