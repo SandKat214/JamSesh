@@ -49,11 +49,19 @@ def register_controller():
         db.session.rollback()
         return jsonify({"error": str(e)}), 400
     
-# Automatic user loading from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
+# Automatic user loading adapated from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
 def login_controller():
     """Logs user in"""
+    username = request.json.get('email')
+    password = request.json.get('password')
 
+    user = models.User.query.filter_by(username=username).one_or_none()
+    if not user:
+        return jsonify({"error": "Invalid email"}), 401
+    if not password:
+        return jsonify({"error": "Invalid password"}), 401
 
+# HELPER METHODS
 def create_new_user(username, email, password, profile_pic, bio, city, state):
     """Set attributes of new user"""
     user = models.User()
@@ -86,4 +94,3 @@ def add_user_instruments(user, instrument_dict):
             )
 
             db.session.add(user_instrument_skill)
-
