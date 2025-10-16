@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from flask_jwt_extended import create_access_token, current_user, jwt_required, JWTManager
+from flask_jwt_extended import create_access_token
 from ... import models, db
 import bcrypt
 
