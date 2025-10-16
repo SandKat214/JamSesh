@@ -1,28 +1,5 @@
 import { createTheme } from "@mui/material/styles"
 
-declare module "@mui/material/styles" {
-	interface Palette {
-		purple: Palette["primary"]
-		gray: Palette["primary"]
-		jamRed: Palette["primary"]
-		white: Palette["primary"]
-	}
-
-	interface PaletteOptions {
-		purple?: PaletteOptions["primary"]
-		gray?: PaletteOptions["primary"]
-		jamRed?: PaletteOptions["primary"]
-		white?: PaletteOptions["primary"]
-	}
-}
-
-declare module "@mui/material/Button" {
-	interface ButtonPropsVariantOverrides {
-		containedPurple: true
-		containedNeutral: true
-	}
-}
-
 const colors = {
 	purple: {
 		main: "#8457FF",
@@ -68,8 +45,10 @@ const theme = createTheme({
 		allVariants: {
 			color: colors.purple.dark,
 			letterSpacing: "0.5px",
+			whiteSpace: "normal",
+			wordBreak: "break-word",
 		},
-		h6: {
+		formLabel: {
 			fontSize: ".75rem",
 		},
 	},
@@ -86,6 +65,7 @@ const theme = createTheme({
 						borderRadius: "12px",
 						padding: "2px 23px",
 						boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.25)",
+						width: "fit-content",
 					},
 				},
 				{
@@ -98,12 +78,33 @@ const theme = createTheme({
 						borderRadius: "12px",
 						padding: "2px 23px",
 						boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.25)",
+						width: "fit-content",
 						"&.Mui-disabled": {
 							display: "none",
 						},
 					},
 				},
 			],
+		},
+		MuiCssBaseline: {
+			styleOverrides: {
+				body: {
+					scrollbarWidth: "thin",
+					scrollbarColor: `${colors.purple.main} ${colors.white.main}`,
+				},
+				// "*::-webkit-scrollbar": {
+				// 	width: "8px",
+				// 	borderRadius: "40px",
+				// },
+				// "*::-webkit-scrollbar-track": {
+				// 	backgroundColor: colors.white.main,
+				// 	borderRadius: "40px",
+				// },
+				// "*::-webkit-scrollbar-thumb": {
+				// 	backgroundColor: colors.purple.main,
+				// 	borderRadius: "10px",
+				// },
+			},
 		},
 		MuiFormControl: {
 			styleOverrides: {
@@ -118,6 +119,7 @@ const theme = createTheme({
 					},
 					"& .MuiOutlinedInput-root": {
 						backgroundColor: colors.white.main,
+						padding: 0,
 						"& fieldset": {
 							border: `2px solid ${colors.white.dark}`,
 						},
@@ -128,6 +130,40 @@ const theme = createTheme({
 							borderColor: colors.purple.main,
 						},
 					},
+				},
+			},
+		},
+		MuiSlider: {
+			styleOverrides: {
+				root: {
+					width: "150px",
+					marginBottom: "15px",
+				},
+				mark: {
+					color: colors.purple.main,
+					width: "4px",
+					height: "4px",
+					borderRadius: "100%",
+				},
+				markLabel: {
+					fontSize: ".75rem",
+					color: colors.jamRed.main,
+					top: "25px",
+				},
+				rail: {
+					backgroundColor: colors.white.main,
+				},
+				thumb: {
+					backgroundColor: colors.jamRed.main,
+					width: "12px",
+					height: "12px",
+					"&:hover, &.Mui-active": {
+						boxShadow: `0 0 0 8px ${colors.jamRed.main}33`,
+					},
+				},
+				track: {
+					color: colors.jamRed.main,
+					height: "3px",
 				},
 			},
 		},
