@@ -3,7 +3,6 @@
 # Schema definitions derived from https://marshmallow-sqlalchemy.readthedocs.io/en/latest/ 
 
 from sqlalchemy import inspect
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, fields
 from . import db
 import bcrypt
 
@@ -25,21 +24,6 @@ class User(db.Model):
          database, else return false"""
          hash = self.password.encode('utf-8')
          return bcrypt.checkpw(provided_password.encode('utf-8'), hash)
-    
-class UserSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = User
-        load_instance = True
-
-    username = fields.Str(required=True)
-    email = fields.Email(required=True)
-    password = fields.Str(required=True, load_only=True)
-    profile_pic = fields.Str(required=True)
-    bio = fields.Str(required=True)
-    city = fields.Str(required=True)
-    state = fields.Str(required=True)
-    instruments = fields.Dict(keys=fields.Int(), values=fields.Int(), required=True)
-    genres = fields.List(fields.Int(), required=True)
 
 class User_Genre(db.Model):
     __table__ = db.metadata.tables["User_Genres"]
