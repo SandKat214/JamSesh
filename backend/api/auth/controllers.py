@@ -33,7 +33,7 @@ def register_controller():
         new_user = create_new_user(username, email, hash, profile_pic, bio, city, state)
         add_user_genres(new_user, genres)
         db.session.add(new_user)
-        #add_user_instruments(new_user, instruments)
+        add_user_instruments(new_user, instruments)
 
         # Save new user info to database and generate access token
         db.session.commit()
@@ -75,14 +75,13 @@ def add_user_genres(user, genre_list):
 
 def add_user_instruments(user, instrument_dict):
     """Add instruments and corresponding skill level associated with given user"""
-    for instr_id, skill in instrument_dict:
-        instrument = models.Instrument.query.filter_by(instrument_id=instr_id).first()
+    for instr_id, skill in instrument_dict.items():
+        instrument = models.Instrument.query.filter_by(instrument_id=int(instr_id)).first()
         if instrument:
             user_instrument_skill = models.User_Instrument(
                 user=user,
                 instrument=instrument,
-                skill_level=skill
+                skill_level=int(skill)
             )
 
             db.session.add(user_instrument_skill)
-
