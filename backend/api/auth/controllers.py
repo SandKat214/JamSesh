@@ -29,9 +29,13 @@ def register_controller():
         hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hash = hash.decode('utf-8')
         
-        # create new user, add to database, and generate access token
+        # create new user and add associated genres and instrument skill levels
         new_user = create_new_user(username, email, hash, profile_pic, bio, city, state)
+        add_user_genres(new_user, genres)
         db.session.add(new_user)
+        #add_user_instruments(new_user, instruments)
+
+        # Save new user info to database and generate access token
         db.session.commit()
         token = create_access_token(identity=new_user.user_id)
 
@@ -69,6 +73,16 @@ def add_user_genres(user, genre_list):
         if genre:
             user.genres.append(genre)
 
-def add_user_instruments(user, instrument_list):
+def add_user_instruments(user, instrument_dict):
     """Add instruments and corresponding skill level associated with given user"""
-    pass
+    for instr_id, skill in instrument_dict:
+        instrument = models.Instrument.query.filter_by(instrument_id=instr_id).first()
+        if instrument:
+            user_instrument_skill = models.User_Instrument(
+                user=user,
+                instrument=instrument,
+                skill_level=skill
+            )
+
+            db.session.add(user_instrument_skill)
+
