@@ -1,7 +1,9 @@
 # toDict method based on https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj#how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql
 # Relationship definitions derived from https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
+# Schema definitions derived from https://marshmallow-sqlalchemy.readthedocs.io/en/latest/ 
 
 from sqlalchemy import inspect
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from . import db
 import bcrypt
 
@@ -23,7 +25,12 @@ class User(db.Model):
          database, else return false"""
          hash = self.password.encode('utf-8')
          return bcrypt.checkpw(provided_password.encode('utf-8'), hash)
-         
+    
+class UserSchema(SQLAlchemyAutoSchema):
+     class Meta:
+          model = User
+          load_instance = True
+
 class User_Genre(db.Model):
     __table__ = db.metadata.tables["User_Genres"]
 
