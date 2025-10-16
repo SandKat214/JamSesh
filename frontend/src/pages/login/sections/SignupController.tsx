@@ -124,7 +124,7 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 		onSubmit: (values) => {
 			handleContinue()
 			console.log(values)
-			setOpen(false)
+			handleResetAndClose()
 		},
 	})
 

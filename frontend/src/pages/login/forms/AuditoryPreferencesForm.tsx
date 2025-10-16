@@ -38,7 +38,6 @@ const AuditoryPreferencesForm = ({
 			component='form'
 			onSubmit={(e) => {
 				e.preventDefault()
-				console.log("submit")
 				formik.handleSubmit()
 			}}
 			spacing={3}
