@@ -65,6 +65,7 @@ const theme = createTheme({
 						borderRadius: "12px",
 						padding: "2px 23px",
 						boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.25)",
+						width: "fit-content",
 					},
 				},
 				{
@@ -77,6 +78,7 @@ const theme = createTheme({
 						borderRadius: "12px",
 						padding: "2px 23px",
 						boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.25)",
+						width: "fit-content",
 						"&.Mui-disabled": {
 							display: "none",
 						},
@@ -117,6 +119,7 @@ const theme = createTheme({
 					},
 					"& .MuiOutlinedInput-root": {
 						backgroundColor: colors.white.main,
+						padding: 0,
 						"& fieldset": {
 							border: `2px solid ${colors.white.dark}`,
 						},
