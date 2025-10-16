@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, current_user, jwt_required, JWTManager
 from ... import models, db
 import bcrypt
 
@@ -49,9 +49,10 @@ def register_controller():
         db.session.rollback()
         return jsonify({"error": str(e)}), 400
     
-    
+# Automatic user loading from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
 def login_controller():
-    pass
+    """Logs user in"""
+
 
 def create_new_user(username, email, password, profile_pic, bio, city, state):
     """Set attributes of new user"""
@@ -85,3 +86,4 @@ def add_user_instruments(user, instrument_dict):
             )
 
             db.session.add(user_instrument_skill)
+

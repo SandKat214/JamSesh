@@ -12,6 +12,17 @@ db = SQLAlchemy()
 migrate = Migrate()
 jwt = JWTManager()
 
+# Register JWT callback functions - both functions copied from https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html
+@jwt.user_identity_loader
+def user_identity_lookup(user):
+      """Store user id as part of token"""
+      return user.user_id
+
+@jwt.user_lookup_loader
+def user_lookup_callback(_jwt_header, jwt_data):
+      identity = jwt_data["sub"]
+      return User.query.filter_by(user_id=identity).one_or_none()
+
 def create_app(config_mode):
       app = Flask(__name__)
       app.config.from_object(config[config_mode])
