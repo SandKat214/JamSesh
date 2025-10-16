@@ -1,10 +1,10 @@
 # toDict method based on https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj#how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql
 # Relationship definitions derived from https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
+# Schema definitions derived from https://marshmallow-sqlalchemy.readthedocs.io/en/latest/ 
 
 from sqlalchemy import inspect
-
-# Import db from the current package
 from . import db
+import bcrypt
 
 class User(db.Model):
     __table__ = db.metadata.tables["Users"]
@@ -16,7 +16,14 @@ class User(db.Model):
     user_instruments = db.relationship('User_Instrument', back_populates="user", cascade="all, delete-orphan")
 
     def toDict(self):
-          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+          """Return dictionary of User attributes (excluding password) for serialization into JSON"""
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs if c.key != 'password' }
+    
+    def password_is_valid(self, provided_password):
+         """Return true if provided password matches the hashed password stored in the
+         database, else return false"""
+         hash = self.password.encode('utf-8')
+         return bcrypt.checkpw(provided_password.encode('utf-8'), hash)
 
 class User_Genre(db.Model):
     __table__ = db.metadata.tables["User_Genres"]
