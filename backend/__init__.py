@@ -20,6 +20,8 @@ def user_identity_lookup(user):
 
 @jwt.user_lookup_loader
 def user_lookup_callback(_jwt_header, jwt_data):
+      """Return user object with id from token if found, otherwise return None. Automatically
+       called o=when accessing protected routes """
       identity = jwt_data["sub"]
       return models.User.query.filter_by(user_id=identity).one_or_none()
 
