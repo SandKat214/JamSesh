@@ -139,6 +139,12 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 	// Reset form and close
 	const handleResetAndClose = () => {
 		formik.resetForm()
+		setActiveStep(0)
+
+		// Remove focus of active
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur()
+		}
 		setOpen(false)
 	}
 

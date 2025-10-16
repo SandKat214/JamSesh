@@ -108,7 +108,7 @@ const AuditoryPreferencesForm = ({
 									required
 									value={
 										formik.values.instruments[idx]
-											.instrument
+											?.instrument ?? ""
 									}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
@@ -117,6 +117,9 @@ const AuditoryPreferencesForm = ({
 										<MenuItem
 											key={state.id}
 											value={state.id}
+											disabled={formik.values.instruments
+												.map((i) => i.instrument)
+												.includes(state.id)}
 										>
 											{state.name}
 										</MenuItem>
@@ -143,7 +146,7 @@ const AuditoryPreferencesForm = ({
 									name={`instruments[${idx}].skillLevel`}
 									value={
 										formik.values.instruments[idx]
-											.skillLevel
+											?.skillLevel ?? 1
 									}
 									onChange={(value: number) => {
 										formik.setFieldValue(
@@ -289,7 +292,7 @@ const AuditoryPreferencesForm = ({
 										width: "150px",
 									}}
 									required
-									value={formik.values.genres[idx]}
+									value={formik.values.genres[idx] ?? ""}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 								>
@@ -297,6 +300,9 @@ const AuditoryPreferencesForm = ({
 										<MenuItem
 											key={state.id}
 											value={state.id}
+											disabled={formik.values.genres.includes(
+												state.id
+											)}
 										>
 											{state.name}
 										</MenuItem>
