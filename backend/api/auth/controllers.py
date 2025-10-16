@@ -37,7 +37,7 @@ def register_controller():
 
         # Save new user info to database and generate access token
         db.session.commit()
-        token = create_access_token(identity=new_user.user_id)
+        token = create_access_token(identity=new_user)
 
         return jsonify({
             "message": "New user created successfully",
@@ -62,7 +62,7 @@ def login_controller():
         return jsonify({"error": "Invalid password"}), 401
     
     # Generate access token if user credentials are valid
-    token = create_access_token(identity=user.user_id)
+    token = create_access_token(identity=user)
     return jsonify({
         "message": "User login successful",
         "token": token

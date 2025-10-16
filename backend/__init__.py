@@ -5,7 +5,6 @@ from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
-from . import models
 
 from .config import config
 
@@ -34,7 +33,10 @@ def create_app(config_mode):
       jwt.init_app(app)
 
       # Reflect the database tables after initializing the app
+      global models  # Make models available to JWT callbacks
       with app.app_context():
             db.reflect()
+            # Import models after tables are reflected
+            from . import models
 
       return app
