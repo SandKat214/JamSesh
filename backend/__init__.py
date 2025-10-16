@@ -4,6 +4,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 
 from .config import config
 
@@ -14,6 +15,7 @@ jwt = JWTManager()
 def create_app(config_mode):
       app = Flask(__name__)
       app.config.from_object(config[config_mode])
+      app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 
       db.init_app(app)
       migrate.init_app(app, db)
