@@ -5,6 +5,7 @@ from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
+from . import models
 
 from .config import config
 
@@ -21,7 +22,7 @@ def user_identity_lookup(user):
 @jwt.user_lookup_loader
 def user_lookup_callback(_jwt_header, jwt_data):
       identity = jwt_data["sub"]
-      return User.query.filter_by(user_id=identity).one_or_none()
+      return models.User.query.filter_by(user_id=identity).one_or_none()
 
 def create_app(config_mode):
       app = Flask(__name__)
