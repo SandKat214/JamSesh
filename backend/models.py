@@ -15,7 +15,8 @@ class User(db.Model):
     user_instruments = db.relationship('User_Instrument', back_populates="user", cascade="all, delete-orphan")
 
     def toDict(self):
-          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
+          """Return dictionary of User attributes (excluding password) for serialization into JSON"""
+          return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs if c.key != 'password' }
     
     def password_is_valid(self, provided_password):
          """Return true if provided password matches the hashed password stored in the
