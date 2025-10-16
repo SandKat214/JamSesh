@@ -1,3 +1,5 @@
+# Structure based on https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj
+
 from flask import request
 
 from ...app import app

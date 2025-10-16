@@ -52,14 +52,21 @@ def register_controller():
 # Automatic user loading adapated from: https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading.html   
 def login_controller():
     """Logs user in"""
-    username = request.json.get('email')
+    email = request.json.get('email')
     password = request.json.get('password')
 
-    user = models.User.query.filter_by(username=username).one_or_none()
+    user = models.User.query.filter_by(email=email).one_or_none()
     if not user:
         return jsonify({"error": "Invalid email"}), 401
-    if not password:
+    if not password or not user.password_is_valid(password):
         return jsonify({"error": "Invalid password"}), 401
+    
+    # Generate access token if user credentials are valid
+    token = create_access_token(identity=user.user_id)
+    return jsonify({
+        "message": "User login successful",
+        "token": token
+    }), 200
 
 # HELPER METHODS
 def create_new_user(username, email, password, profile_pic, bio, city, state):

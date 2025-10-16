@@ -2,10 +2,8 @@
 # Relationship definitions derived from https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
 
 from sqlalchemy import inspect
-import bcrypt
-
-# Import db from the current package
 from . import db
+import bcrypt
 
 class User(db.Model):
     __table__ = db.metadata.tables["Users"]
@@ -19,11 +17,11 @@ class User(db.Model):
     def toDict(self):
           return { c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs }
     
-    def password_is_valid(self, user_password):
+    def password_is_valid(self, provided_password):
+         """Return true if provided password matches the hashed password stored in the
+         database, else return false"""
          hash = self.password.encode('utf-8')
-         if bcrypt.checkpw(hash, user_password.encode('utf-8')):
-              return True
-         return False
+         return bcrypt.checkpw(provided_password.encode('utf-8'), hash)
          
 class User_Genre(db.Model):
     __table__ = db.metadata.tables["User_Genres"]
