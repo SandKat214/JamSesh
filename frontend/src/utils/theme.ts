@@ -106,6 +106,25 @@ const theme = createTheme({
 				// },
 			},
 		},
+		MuiDialog: {
+			styleOverrides: {
+				paper: {
+					backgroundColor: colors.white.dark,
+					borderRadius: "25px",
+					paddingX: "10px",
+					paddingBottom: "20px",
+				},
+			},
+		},
+		MuiDialogTitle: {
+			styleOverrides: {
+				root: {
+					fontSize: "25px",
+					fontWeight: 600,
+					textAlign: "center",
+				},
+			},
+		},
 		MuiFormControl: {
 			styleOverrides: {
 				root: {
