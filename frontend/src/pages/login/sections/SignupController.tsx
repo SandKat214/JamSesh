@@ -8,7 +8,6 @@ import {
 	StepContent,
 	StepLabel,
 	Stepper,
-	Typography,
 } from "@mui/material"
 import { useState } from "react"
 import { useFormik } from "formik"

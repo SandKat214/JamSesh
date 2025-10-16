@@ -1,3 +1,13 @@
+/**
+ * Citation for the image drag/drop and uploader:
+ * Date: 10/15/2025
+ * Adapted from code given in blog, but oriented for use with
+ * Material UI components and validation/state tracking using
+ * the formik package library.
+ * Source URL:
+ * https://medium.com/@waliahmadfiles/building-a-file-upload-component-with-drag-and-drop-in-react-712efcc5383b
+ */
+
 import {
 	Box,
 	Button,
@@ -30,7 +40,7 @@ const ProfileDetailsForm = ({
 	handleBack,
 	handleSubmit,
 }: ProfileDetailsFormProps) => {
-	// Ref for implicit file input click
+	// Ref for implicit file <input> click
 	const imageRef = useRef<HTMLInputElement | null>(null)
 
 	// Handles both file change types - drop and upload
