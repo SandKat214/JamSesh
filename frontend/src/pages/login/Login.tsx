@@ -1,10 +1,5 @@
 import { Box, Typography } from "@mui/material"
-import { Box, Typography } from "@mui/material"
 import { useState } from "react"
-
-// Assets
-import background from "../../assets/background.png"
-import JamSesh_tagline from "../../assets/JamSesh_tagline.svg"
 
 // Assets
 import background from "../../assets/background.png"
@@ -17,7 +12,8 @@ const Login = () => {
 	const [open, setOpen] = useState(false) // Dialog control state
 
 	return (
-		<Box sx={{
+		<Box
+			sx={{
 				width: "100vw",
 				height: "100vh",
 				display: "flex",
@@ -25,15 +21,7 @@ const Login = () => {
 				justifyContent: "top",
 				paddingTop: "4%",
 				paddingBottom: "0px",
-				justifyContent: "top",
-				paddingTop: "4%",
-				paddingBottom: "0px",
 				alignItems: "center",
-				backgroundImage: `url(${background})`,
-				backgroundPosition: "bottom",
-				backgroundRepeat: "no-repeat",
-				backgroundSize: "cover",
-				backgroundAttachment: "fixed",
 				backgroundImage: `url(${background})`,
 				backgroundPosition: "bottom",
 				backgroundRepeat: "no-repeat",
