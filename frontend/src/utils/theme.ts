@@ -49,7 +49,7 @@ const theme = createTheme({
 			wordBreak: "break-word",
 		},
 		formLabel: {
-			fontSize: ".75rem",
+			fontSize: ".85rem",
 		},
 	},
 	components: {

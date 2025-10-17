@@ -43,8 +43,13 @@ const AuditoryPreferencesForm = ({
 			spacing={3}
 		>
 			<Stack spacing={1}>
-				<Stack spacing={1}>
-					<Typography component='h4'>Instruments</Typography>
+				<Stack spacing={2}>
+					<Typography
+						component='h3'
+						sx={{ fontSize: "1.2rem", fontWeight: 600 }}
+					>
+						Instruments
+					</Typography>
 					<Stack spacing={1}>
 						<Typography variant='body2'>
 							Please tell us the instrument you play and your
@@ -63,7 +68,7 @@ const AuditoryPreferencesForm = ({
 							Click the{" "}
 							<AddCircleIcon
 								sx={{
-									fontSize: "14px",
+									fontSize: "16px",
 								}}
 							/>{" "}
 							icon to add additional instruments.
@@ -72,7 +77,7 @@ const AuditoryPreferencesForm = ({
 				</Stack>
 
 				{/* Instrument Field(s) */}
-				<Stack>
+				<Stack spacing={2}>
 					{[...Array(instrumentCount)].map((_, idx) => (
 						<Stack
 							key={idx}
@@ -236,7 +241,12 @@ const AuditoryPreferencesForm = ({
 			</Stack>
 			<Stack spacing={1}>
 				<Stack spacing={1}>
-					<Typography component='h4'>Preferred Genres</Typography>
+					<Typography
+						component='h3'
+						sx={{ fontSize: "1.2rem", fontWeight: 600 }}
+					>
+						Preferred Genres
+					</Typography>
 					<Stack spacing={1}>
 						<Typography variant='body2'>
 							Please tell us your preferred style of play.
@@ -250,7 +260,7 @@ const AuditoryPreferencesForm = ({
 							Click the{" "}
 							<AddCircleIcon
 								sx={{
-									fontSize: "14px",
+									fontSize: "16px",
 								}}
 							/>{" "}
 							icon to add additional styles.
