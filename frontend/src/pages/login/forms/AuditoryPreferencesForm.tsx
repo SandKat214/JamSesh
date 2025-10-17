@@ -46,16 +46,16 @@ const AuditoryPreferencesForm = ({
 				<Stack spacing={1}>
 					<Typography component='h4'>Instruments</Typography>
 					<Stack spacing={1}>
-						<Typography variant='caption'>
+						<Typography variant='body2'>
 							Please tell us the instrument you play and your
 							skill level with that instrument.
 						</Typography>
-						<Typography variant='caption'>
+						<Typography variant='body2'>
 							Skill level is rated 1-10, with 1 being an absolute
 							beginner and 10 being a savant.
 						</Typography>
 						<Typography
-							variant='caption'
+							variant='body2'
 							sx={{
 								justifyItems: "center",
 							}}
@@ -238,11 +238,11 @@ const AuditoryPreferencesForm = ({
 				<Stack spacing={1}>
 					<Typography component='h4'>Preferred Genres</Typography>
 					<Stack spacing={1}>
-						<Typography variant='caption'>
+						<Typography variant='body2'>
 							Please tell us your preferred style of play.
 						</Typography>
 						<Typography
-							variant='caption'
+							variant='body2'
 							sx={{
 								justifyItems: "center",
 							}}

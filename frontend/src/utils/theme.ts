@@ -167,17 +167,17 @@ const theme = createTheme({
 					borderRadius: "100%",
 				},
 				markLabel: {
-					fontSize: ".75rem",
+					fontSize: ".85rem",
 					color: colors.jamRed.main,
-					top: "25px",
+					top: "30px",
 				},
 				rail: {
 					backgroundColor: colors.white.main,
 				},
 				thumb: {
 					backgroundColor: colors.jamRed.main,
-					width: "12px",
-					height: "12px",
+					width: "15px",
+					height: "15px",
 					"&:hover, &.Mui-active": {
 						boxShadow: `0 0 0 8px ${colors.jamRed.main}33`,
 					},

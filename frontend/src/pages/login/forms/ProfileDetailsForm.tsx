@@ -117,7 +117,7 @@ const ProfileDetailsForm = ({
 											overflow: "hidden",
 											whiteSpace: "nowrap",
 											textOverflow: "ellipsis",
-											fontWeight: 600,
+											fontWeight: 700,
 										}}
 									>
 										{

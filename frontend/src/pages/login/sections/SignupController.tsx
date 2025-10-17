@@ -52,6 +52,7 @@ const ControllerButton = ({ onClick }: { onClick: () => void }) => {
 				color: "jamRed.main",
 				textTransform: "none",
 				fontWeight: 600,
+				fontSize: "1rem",
 				p: 0,
 				"&:hover": { textDecoration: "underline", bgcolor: "inherit" },
 			}}

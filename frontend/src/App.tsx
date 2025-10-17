@@ -17,7 +17,7 @@ export default function App() {
 		return createBrowserRouter([
 			{
 				path: "/",
-				element: <></>,
+				element: <></>, // TODO: Build Root Layout and Home Page
 			},
 			{
 				path: "login",
