@@ -12,6 +12,8 @@ If new required packages are added during development, you can update the requir
 
 To activate the Flask backend, enter the command `flask run -h localhost -p 5000`, optionally changing `5000` to a different port of your choice.
 
+A JWT_SECRET_KEY can be generated via this website: https://jwtsecrets.com/.
+
 
 Initial setup and file structure based on:
 
