@@ -29,6 +29,9 @@ const ConfirmAlert = ({
 			component='form'
 			onSubmit={(e) => {
 				e.preventDefault()
+				if (document.activeElement instanceof HTMLElement) {
+					document.activeElement.blur()
+				}
 				setOpen(false)
 			}}
 			slotProps={{

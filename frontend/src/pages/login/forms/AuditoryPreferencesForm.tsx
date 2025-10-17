@@ -38,25 +38,29 @@ const AuditoryPreferencesForm = ({
 			component='form'
 			onSubmit={(e) => {
 				e.preventDefault()
-				console.log("submit")
 				formik.handleSubmit()
 			}}
 			spacing={3}
 		>
 			<Stack spacing={1}>
-				<Stack spacing={1}>
-					<Typography component='h4'>Instruments</Typography>
+				<Stack spacing={2}>
+					<Typography
+						component='h3'
+						sx={{ fontSize: "1.2rem", fontWeight: 600 }}
+					>
+						Instruments
+					</Typography>
 					<Stack spacing={1}>
-						<Typography variant='caption'>
+						<Typography variant='body2'>
 							Please tell us the instrument you play and your
 							skill level with that instrument.
 						</Typography>
-						<Typography variant='caption'>
+						<Typography variant='body2'>
 							Skill level is rated 1-10, with 1 being an absolute
 							beginner and 10 being a savant.
 						</Typography>
 						<Typography
-							variant='caption'
+							variant='body2'
 							sx={{
 								justifyItems: "center",
 							}}
@@ -64,7 +68,7 @@ const AuditoryPreferencesForm = ({
 							Click the{" "}
 							<AddCircleIcon
 								sx={{
-									fontSize: "14px",
+									fontSize: "16px",
 								}}
 							/>{" "}
 							icon to add additional instruments.
@@ -73,7 +77,7 @@ const AuditoryPreferencesForm = ({
 				</Stack>
 
 				{/* Instrument Field(s) */}
-				<Stack>
+				<Stack spacing={2}>
 					{[...Array(instrumentCount)].map((_, idx) => (
 						<Stack
 							key={idx}
@@ -108,7 +112,7 @@ const AuditoryPreferencesForm = ({
 									required
 									value={
 										formik.values.instruments[idx]
-											.instrument
+											?.instrument ?? ""
 									}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
@@ -117,6 +121,9 @@ const AuditoryPreferencesForm = ({
 										<MenuItem
 											key={state.id}
 											value={state.id}
+											disabled={formik.values.instruments
+												.map((i) => i.instrument)
+												.includes(state.id)}
 										>
 											{state.name}
 										</MenuItem>
@@ -143,7 +150,7 @@ const AuditoryPreferencesForm = ({
 									name={`instruments[${idx}].skillLevel`}
 									value={
 										formik.values.instruments[idx]
-											.skillLevel
+											?.skillLevel ?? 1
 									}
 									onChange={(value: number) => {
 										formik.setFieldValue(
@@ -165,6 +172,7 @@ const AuditoryPreferencesForm = ({
 										size='small'
 										sx={{
 											p: 0,
+											backgroundColor: "white.dark",
 											"&:hover": {
 												backgroundColor: "purple.main",
 											},
@@ -184,10 +192,7 @@ const AuditoryPreferencesForm = ({
 									>
 										<DeleteIcon
 											sx={{
-												color: "gray.main",
-												"&:hover": {
-													color: "white.main",
-												},
+												color: "white.main",
 											}}
 										/>
 									</IconButton>
@@ -208,6 +213,7 @@ const AuditoryPreferencesForm = ({
 							size='small'
 							sx={{
 								p: 0,
+								backgroundColor: "white.dark",
 								"&:hover": {
 									backgroundColor: "purple.main",
 								},
@@ -226,10 +232,7 @@ const AuditoryPreferencesForm = ({
 						>
 							<AddCircleIcon
 								sx={{
-									color: "gray.main",
-									"&:hover": {
-										color: "white.main",
-									},
+									color: "white.main",
 								}}
 							/>
 						</IconButton>
@@ -238,13 +241,18 @@ const AuditoryPreferencesForm = ({
 			</Stack>
 			<Stack spacing={1}>
 				<Stack spacing={1}>
-					<Typography component='h4'>Preferred Genres</Typography>
+					<Typography
+						component='h3'
+						sx={{ fontSize: "1.2rem", fontWeight: 600 }}
+					>
+						Preferred Genres
+					</Typography>
 					<Stack spacing={1}>
-						<Typography variant='caption'>
+						<Typography variant='body2'>
 							Please tell us your preferred style of play.
 						</Typography>
 						<Typography
-							variant='caption'
+							variant='body2'
 							sx={{
 								justifyItems: "center",
 							}}
@@ -252,7 +260,7 @@ const AuditoryPreferencesForm = ({
 							Click the{" "}
 							<AddCircleIcon
 								sx={{
-									fontSize: "14px",
+									fontSize: "16px",
 								}}
 							/>{" "}
 							icon to add additional styles.
@@ -289,7 +297,7 @@ const AuditoryPreferencesForm = ({
 										width: "150px",
 									}}
 									required
-									value={formik.values.genres[idx]}
+									value={formik.values.genres[idx] ?? ""}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 								>
@@ -297,6 +305,9 @@ const AuditoryPreferencesForm = ({
 										<MenuItem
 											key={state.id}
 											value={state.id}
+											disabled={formik.values.genres.includes(
+												state.id
+											)}
 										>
 											{state.name}
 										</MenuItem>
@@ -314,6 +325,7 @@ const AuditoryPreferencesForm = ({
 											size='small'
 											sx={{
 												p: 0,
+												backgroundColor: "white.dark",
 												"&:hover": {
 													backgroundColor:
 														"purple.main",
@@ -334,10 +346,7 @@ const AuditoryPreferencesForm = ({
 										>
 											<DeleteIcon
 												sx={{
-													color: "gray.main",
-													"&:hover": {
-														color: "white.main",
-													},
+													color: "white.main",
 												}}
 											/>
 										</IconButton>
@@ -359,6 +368,7 @@ const AuditoryPreferencesForm = ({
 							size='small'
 							sx={{
 								p: 0,
+								backgroundColor: "white.dark",
 								"&:hover": {
 									backgroundColor: "purple.main",
 								},
@@ -373,10 +383,7 @@ const AuditoryPreferencesForm = ({
 						>
 							<AddCircleIcon
 								sx={{
-									color: "gray.main",
-									"&:hover": {
-										color: "white.main",
-									},
+									color: "white.main",
 								}}
 							/>
 						</IconButton>

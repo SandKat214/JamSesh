@@ -8,7 +8,6 @@ import {
 	StepContent,
 	StepLabel,
 	Stepper,
-	Typography,
 } from "@mui/material"
 import { useState } from "react"
 import { useFormik } from "formik"
@@ -53,6 +52,7 @@ const ControllerButton = ({ onClick }: { onClick: () => void }) => {
 				color: "jamRed.main",
 				textTransform: "none",
 				fontWeight: 600,
+				fontSize: "1rem",
 				p: 0,
 				"&:hover": { textDecoration: "underline", bgcolor: "inherit" },
 			}}
@@ -125,7 +125,7 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 		onSubmit: (values) => {
 			handleContinue()
 			console.log(values)
-			setOpen(false)
+			handleResetAndClose()
 		},
 	})
 
@@ -140,6 +140,12 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 	// Reset form and close
 	const handleResetAndClose = () => {
 		formik.resetForm()
+		setActiveStep(0)
+
+		// Remove focus of active
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur()
+		}
 		setOpen(false)
 	}
 

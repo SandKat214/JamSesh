@@ -1,4 +1,9 @@
-// Need to add Citation for Net Ninja for this context pattern and corresponding hooks!
+/**
+ * Citation for the image drag/drop and uploader:
+ * Date: 10/14/2025
+ * Copied from video tutorial
+ * Source URL: https://youtu.be/64RiVcXhxN0?si=Kc0WPvrNYGjZUSFx
+ */
 
 import {
 	createContext,

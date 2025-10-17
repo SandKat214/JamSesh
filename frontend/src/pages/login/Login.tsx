@@ -12,7 +12,8 @@ const Login = () => {
 	const [open, setOpen] = useState(false) // Dialog control state
 
 	return (
-		<Box sx={{
+		<Box
+			sx={{
 				width: "100vw",
 				height: "100vh",
 				display: "flex",
@@ -30,7 +31,8 @@ const Login = () => {
 		>
 			<img src={JamSesh_tagline} width='350px' height='135px' />
 			{/* Login box, blur effect adapted from https://css.glass */}
-			<Box sx={{
+			<Box
+				sx={{
 					width: "600px",
 					height: "620px",
 					display: "flex",
