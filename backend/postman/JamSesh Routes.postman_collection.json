@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "a891a31b-d458-4e59-b8a1-47f9c9b941f5",
+		"name": "JamSesh Routes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37735645"
+	},
+	"item": [
+		{
+			"name": "/auth/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"Sophie Kim\",\r\n  \"email\": \"sophie.rivera@example.com\",\r\n  \"password\": \"PianoQueen42!\",\r\n  \"profile_pic\": \"https://example.com/profiles/sophie.jpg\",\r\n  \"bio\": \"Classical pianist and jazz enthusiast, loves teaching and collaborating.\",\r\n  \"city\": \"Seattle\",\r\n  \"state\": \"WA\",\r\n  \"instruments\": {\r\n    \"2\": 9,\r\n    \"5\": 6,\r\n    \"7\": 8\r\n  },\r\n  \"genres\": [2, 4, 6]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"maya.musiclover@gmail.com\",\r\n    \"password\": \"wrongpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/genres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/genres",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"genres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/instruments",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
