@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import jsonify
 from ... import models, db
 
 # Adapted from https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj

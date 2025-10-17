@@ -6,7 +6,7 @@ from ...app import app
 from .controllers import get_genres_controller
 
 @app.route("/genres", methods=['GET'])
-def register_user():
+def get_genres():
     if request.method == 'GET':
         return get_genres_controller()
     else:
