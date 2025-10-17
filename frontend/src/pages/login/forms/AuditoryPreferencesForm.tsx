@@ -167,6 +167,7 @@ const AuditoryPreferencesForm = ({
 										size='small'
 										sx={{
 											p: 0,
+											backgroundColor: "white.dark",
 											"&:hover": {
 												backgroundColor: "purple.main",
 											},
@@ -186,10 +187,7 @@ const AuditoryPreferencesForm = ({
 									>
 										<DeleteIcon
 											sx={{
-												color: "gray.main",
-												"&:hover": {
-													color: "white.main",
-												},
+												color: "white.main",
 											}}
 										/>
 									</IconButton>
@@ -210,6 +208,7 @@ const AuditoryPreferencesForm = ({
 							size='small'
 							sx={{
 								p: 0,
+								backgroundColor: "white.dark",
 								"&:hover": {
 									backgroundColor: "purple.main",
 								},
@@ -228,10 +227,7 @@ const AuditoryPreferencesForm = ({
 						>
 							<AddCircleIcon
 								sx={{
-									color: "gray.main",
-									"&:hover": {
-										color: "white.main",
-									},
+									color: "white.main",
 								}}
 							/>
 						</IconButton>
@@ -319,6 +315,7 @@ const AuditoryPreferencesForm = ({
 											size='small'
 											sx={{
 												p: 0,
+												backgroundColor: "white.dark",
 												"&:hover": {
 													backgroundColor:
 														"purple.main",
@@ -339,10 +336,7 @@ const AuditoryPreferencesForm = ({
 										>
 											<DeleteIcon
 												sx={{
-													color: "gray.main",
-													"&:hover": {
-														color: "white.main",
-													},
+													color: "white.main",
 												}}
 											/>
 										</IconButton>
@@ -364,6 +358,7 @@ const AuditoryPreferencesForm = ({
 							size='small'
 							sx={{
 								p: 0,
+								backgroundColor: "white.dark",
 								"&:hover": {
 									backgroundColor: "purple.main",
 								},
@@ -378,10 +373,7 @@ const AuditoryPreferencesForm = ({
 						>
 							<AddCircleIcon
 								sx={{
-									color: "gray.main",
-									"&:hover": {
-										color: "white.main",
-									},
+									color: "white.main",
 								}}
 							/>
 						</IconButton>

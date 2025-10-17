@@ -109,10 +109,12 @@ const theme = createTheme({
 		MuiDialog: {
 			styleOverrides: {
 				paper: {
-					backgroundColor: colors.white.dark,
+					backgroundColor: "rgba(248, 248, 248, 0.75)",
 					borderRadius: "25px",
 					paddingX: "10px",
 					paddingBottom: "20px",
+					backdropFilter: "blur(10px)",
+					WebkitBackdropFilter: "blur(10px)",
 				},
 			},
 		},
