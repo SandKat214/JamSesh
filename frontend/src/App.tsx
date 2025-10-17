@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material"
 import { createBrowserRouter } from "react-router"
 import { RouterProvider } from "react-router/dom"
 import { useMemo } from "react"
@@ -18,11 +17,7 @@ export default function App() {
 		return createBrowserRouter([
 			{
 				path: "/",
-				element: (
-					<Box>
-						<Typography color='jamRed'>Home Page</Typography>
-					</Box>
-				),
+				element: <></>,
 			},
 			{
 				path: "login",
