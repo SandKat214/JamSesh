@@ -13,8 +13,9 @@ def hello():
     return "Hello World!"
 
 
-# Register test query routes
+# Register routes
 from .api.auth import urls
+from .api.genres import urls
 
 if __name__ == "__main__":
     app.run()
