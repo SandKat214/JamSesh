@@ -5,6 +5,7 @@ from flask import request
 from ...app import app
 from .controllers import get_genres_controller
 
+
 @app.route("/genres", methods=['GET'])
 def get_genres():
     if request.method == 'GET':

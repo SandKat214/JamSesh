@@ -1,8 +1,17 @@
 from flask import jsonify
-from ...models import Instrument
+from ... import models
 
 
-def list_all_instruments_controller():
-    instruments = Instrument.query.all()
-    instruments_list = [instrument.toDict() for instrument in instruments]  # Using the toDict method
-    return jsonify(instruments_list)
+# Adapted from https://dev.to/yahiaqous/how-to-build-a-crud-api-using-python-flask-and-sqlalchemy-orm-with-postgresql-2jjj
+def get_instruments_controller():
+    """Retrieve all instruments"""
+    try:
+        instrument_list = models.Instrument.query.order_by(models.Instrument.name).all()
+
+        response = []
+        for instrument in instrument_list:
+            response.append(instrument.toDict())
+
+        return jsonify(response), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
