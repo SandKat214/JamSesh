@@ -3,7 +3,7 @@ import { RouterProvider } from "react-router/dom"
 import { useMemo } from "react"
 
 // hooks
-import { useAuth } from "./context/auth/useAuth"
+import { useAuth } from "./hooks/auth/useAuth"
 
 // pages
 import Login from "./pages/login/Login"

@@ -6,7 +6,7 @@ from flask_cors import CORS
 # App Initialization
 from . import create_app  # from __init__ file
 app = create_app(os.getenv("CONFIG_MODE"))
-cors = CORS(app, origins="http://127.0.0.1:5173")
+cors = CORS(app, origins=["http://127.0.0.1:5173", "http://localhost:5173"])
 
 
 # Return an informative string at the root directory.
