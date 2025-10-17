@@ -11,6 +11,13 @@ import type { FormikProps } from "formik"
 import type { SignupFormValues } from "../sections/SignupController"
 import { useState } from "react"
 
+// Queries
+import { useQuery } from "@tanstack/react-query"
+import { genresOptions } from "../../../api/queries/genres"
+
+// Types
+import type { Genre } from "../../../definitions/types"
+
 // Icons
 import AddCircleIcon from "@mui/icons-material/AddCircle"
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -30,8 +37,11 @@ const AuditoryPreferencesForm = ({
 	handleBack,
 }: AuditoryPreferencesFormProps) => {
 	// track component state
-	const [instrumentCount, setInstrumentCount] = useState(1)
 	const [genreCount, setGenreCount] = useState(1)
+	const [instrumentCount, setInstrumentCount] = useState(1)
+
+	// Fetch genres for select
+	const { data: genreList, isLoading } = useQuery(genresOptions())
 
 	return (
 		<Stack
@@ -301,17 +311,18 @@ const AuditoryPreferencesForm = ({
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 								>
-									{states.map((state) => (
-										<MenuItem
-											key={state.id}
-											value={state.id}
-											disabled={formik.values.genres.includes(
-												state.id
-											)}
-										>
-											{state.name}
-										</MenuItem>
-									))}
+									{Array.isArray(genreList) &&
+										genreList.map((genre: Genre) => (
+											<MenuItem
+												key={genre.genre_id}
+												value={genre.genre_id}
+												disabled={formik.values.genres.includes(
+													genre.genre_id
+												)}
+											>
+												{genre.name}
+											</MenuItem>
+										))}
 								</Select>
 								{idx > 0 && idx === genreCount - 1 && (
 									<Box

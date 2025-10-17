@@ -41,7 +41,7 @@ export interface SignupFormValues {
 		instrument: string
 		skillLevel: number
 	}[]
-	genres: string[]
+	genres: (string | number)[]
 }
 
 // Sign up button

@@ -1,7 +1,7 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { CssBaseline, ThemeProvider } from "@mui/material"
-import { AuthProvider } from "./context/auth/AuthContext"
+import { AuthProvider } from "./hooks/auth/AuthContext.tsx"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 // styles
