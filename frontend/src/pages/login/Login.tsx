@@ -50,9 +50,11 @@ const Login = () => {
 				}}
 			>
 				<Typography fontSize='3em'>Welcome Back</Typography>
-                
+                {/* Login form: */}
                 <LoginController/>
-				<SignupController open={open} setOpen={setOpen} />
+                <Typography fontSize='1em'>Don't have an account?</Typography>
+                {/* Account signup form: */}
+				<SignupController open={open} setOpen={setOpen}/>
 			</Box>
 		</Box>
 	)
