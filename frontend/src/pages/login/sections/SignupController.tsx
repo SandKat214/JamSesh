@@ -22,6 +22,7 @@ import PersonalDetailsForm from "../forms/PersonalDetailsForm"
 import ProfileDetailsForm from "../forms/ProfileDetailsForm"
 import AuditoryPreferencesForm from "../forms/AuditoryPreferencesForm"
 import ConfirmAlert from "../../../components/alerts/ConfirmAlert"
+import SnapAlert from "../../../components/alerts/SnapAlert"
 
 interface SignupControllerProps {
 	open: boolean
@@ -38,7 +39,7 @@ export interface SignupFormValues {
 	bio: string
 	profile_pic: File | undefined
 	instruments: {
-		instrument: string
+		instrument: string | number
 		skillLevel: number
 	}[]
 	genres: (string | number)[]
@@ -68,6 +69,7 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 	// track component state
 	const [activeStep, setActiveStep] = useState(0) // Stepper control state
 	const [openConfirm, setOpenConfirm] = useState(false) // ConfirmAlert control state
+	const [openAlert, setOpenAlert] = useState(false) // SnapAlert control state
 
 	// form validation
 	const formik = useFormik<SignupFormValues>({
@@ -217,6 +219,8 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 								<AuditoryPreferencesForm
 									formik={formik}
 									handleBack={handleBack}
+									handleResetAndClose={handleResetAndClose}
+									setOpenAlert={setOpenAlert}
 								/>
 							</StepContent>
 						</Step>
@@ -231,6 +235,14 @@ const SignupController = ({ open, setOpen }: SignupControllerProps) => {
 				open={openConfirm}
 				setOpen={setOpenConfirm}
 				title='You have unsaved changes.'
+			/>
+
+			{/* Query Fetch Error Alert */}
+			<SnapAlert
+				message={`Error loading some features.\nPlease try again later.`}
+				open={openAlert}
+				setOpen={setOpenAlert}
+				severity='error'
 			/>
 		</Stack>
 	)

@@ -3,4 +3,9 @@ type Genre = {
 	name: string
 }
 
-export { type Genre }
+type Instrument = {
+	instrument_id: number | string
+	name: string
+}
+
+export { type Genre, type Instrument }
