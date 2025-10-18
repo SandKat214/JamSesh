@@ -7,6 +7,7 @@ import JamSesh_tagline from "../../assets/JamSesh_tagline.svg"
 
 // Components
 import SignupController from "./sections/SignupController"
+import LoginController from "./sections/LoginController"
 
 const Login = () => {
 	const [open, setOpen] = useState(false) // Dialog control state
@@ -19,7 +20,7 @@ const Login = () => {
 				display: "flex",
 				flexDirection: "column",
 				justifyContent: "top",
-				paddingTop: "4%",
+				paddingTop: "3.5%",
 				paddingBottom: "0px",
 				alignItems: "center",
 				backgroundImage: `url(${background})`,
@@ -38,7 +39,7 @@ const Login = () => {
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
-					marginTop: "4%",
+					marginTop: "3.5%",
 					paddingTop: "2em",
 					borderRadius: "4em",
 					background: "rgba(255, 255, 255, 0.58)",
@@ -49,6 +50,8 @@ const Login = () => {
 				}}
 			>
 				<Typography fontSize='3em'>Welcome Back</Typography>
+                
+                <LoginController/>
 				<SignupController open={open} setOpen={setOpen} />
 			</Box>
 		</Box>
