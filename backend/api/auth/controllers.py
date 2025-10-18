@@ -22,6 +22,8 @@ def register_controller():
 
     if not username or not email or not password or not bio or not city or not state or not instruments or not genres:
         return jsonify({"error": "Required field missing"}), 400
+    
+    # TO DO: Validate profile_pic to make sure it's an empty string or Cloudinary url
 
     try:
         # error handling if email already in database
